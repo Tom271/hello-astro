@@ -5,7 +5,7 @@ import image from '@astrojs/image'
 import mdx from '@astrojs/mdx'
 import alpinejs from '@astrojs/alpinejs'
 import robotsTxt from 'astro-robots-txt'
-
+import netlify from '@astrojs/netlify/functions';
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import remarkPlantUML from '@akebifiky/remark-simple-plantuml'
@@ -14,13 +14,15 @@ import { remarkDiagram } from './remark-plugins/remark-diagram.mjs';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
+  adapter: netlify(),
   vite: {
     ssr: {
       external: ['svgo'],
       noExternal: ['swiper', 'leaflet'],
     },
   },
-  site: 'https://hellotham.github.io',
+  // site: 'https://hellotham.github.io',
   base: '/hello-astro',
   integrations: [tailwind(), sitemap(), image(), mdx(), alpinejs(), robotsTxt()],
   experimental: {
